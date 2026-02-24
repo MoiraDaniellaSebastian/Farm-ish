@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.InputSystem;
+using UnityEngine;using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterController2D : MonoBehaviour
@@ -29,9 +27,10 @@ public class CharacterController2D : MonoBehaviour
         animator.SetFloat("horizontal", horizontal);
         animator.SetFloat("vertical", vertical);
 
-        moving = horizontal != 0 || vertical != 0;
+        moving = horizontal != 0 && vertical != 0;
+        animator.SetBool("moving",moving);
 
-        if (horizontal != 0 || vertical != 0)
+        if (horizontal != 0 && vertical != 0)
         {
             lastMotionVector = new Vector2(
                 horizontal,

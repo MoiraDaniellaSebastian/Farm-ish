@@ -7,15 +7,18 @@ public class PickUpItem : MonoBehaviour
     [SerializeField] float pickUpDistance = 1.5f;
     [SerializeField] float ttl = 5f;
 
-    private void Awake()
+    private void Start()
     {
-        player = GameManager.instance.player.transform;
+        if (GameManager.instance != null && GameManager.instance.player != null)
+            player = GameManager.instance.player.transform;
     }
+
     private void Update()
     {
-        ttl -= Time.deltaTime;
-        if (ttl < 0) { Destroy (gameObject); }  
+        if (player == null) return;
 
+        ttl -= Time.deltaTime;
+        if (ttl < 0) { Destroy (gameObject); return; }
 
         float distance = Vector3.Distance(transform.position, player.position); 
             if (distance > pickUpDistance)
